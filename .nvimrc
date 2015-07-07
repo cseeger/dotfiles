@@ -17,18 +17,30 @@ Plug 'bling/vim-airline'
 
 call plug#end()
 
+" Basics
 set nobackup
 set nowb
 set noswapfile
+set number
+set ruler
 set encoding=utf8
+
+" Whitespace
 set showtabline=2
-set showmatch
-set smarttab
+set tabstop=2
+set shiftwidth=2
 set expandtab
+set list
+set backspace=indent,eol,start
+set smarttab
 set ai
 set si
 set wrap
 
+" Misc
+set showmatch
+
+" Theme/Color
 let g:seoul256_background = 233
 colo seoul256
 
@@ -37,5 +49,4 @@ let g:mapleader = ","
 
 vmap <Enter> <Plug>(EasyAlign)
 map <leader>n :NERDTreeToggle<CR>
-set number
 nnoremap <silent> _ :nohl<CR>
