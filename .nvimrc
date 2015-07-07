@@ -20,6 +20,14 @@ call plug#end()
 set nobackup
 set nowb
 set noswapfile
+set encoding=utf8
+set showtabline=2
+set showmatch
+set smarttab
+set expandtab
+set ai
+set si
+set wrap
 
 let g:seoul256_background = 233
 colo seoul256
