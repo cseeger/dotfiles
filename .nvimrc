@@ -30,3 +30,4 @@ let g:mapleader = ","
 vmap <Enter> <Plug>(EasyAlign)
 map <leader>n :NERDTreeToggle<CR>
 set number
+nnoremap <silent> _ :nohl<CR>
