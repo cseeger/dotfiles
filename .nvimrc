@@ -11,6 +11,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'kchmck/vim-coffee-script'
+Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
@@ -45,6 +48,7 @@ set clipboard=unnamed
 set synmaxcol=128
 set timeoutlen=500
 set ttimeoutlen=10
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Auto commands
 " Automatically reload .vimrc on save
