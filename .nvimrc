@@ -12,6 +12,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -19,6 +20,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'bling/vim-airline'
 Plug 'wincent/terminus'
+Plug 'kien/ctrlp.vim'
 
 call plug#end()
 
@@ -48,7 +50,17 @@ set clipboard=unnamed
 set synmaxcol=128
 set timeoutlen=500
 set ttimeoutlen=10
+set grepprg=ag
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+set cursorline
+
+" CtrlP settings
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = 0
+let g:ctrlp_show_hidden = 0
+"let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Auto commands
 " Automatically reload .vimrc on save
@@ -67,6 +79,7 @@ vmap <Enter> <Plug>(EasyAlign)
 map <leader>n :NERDTreeToggle<CR>
 nnoremap <silent> _ :nohl<CR>
 
+" Terminal mappings
 :tnoremap <A-h> <C-\><C-n><C-w>h
 :tnoremap <A-j> <C-\><C-n><C-w>j
 :tnoremap <A-k> <C-\><C-n><C-w>k
@@ -77,3 +90,12 @@ nnoremap <silent> _ :nohl<CR>
 :nnoremap <A-l> <C-w>l
 :nnoremap <A-_> <C-w>_
 :nnoremap <A-=> <C-w>=
+
+" Easymotion mappings
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" `s{char}{label}`
+nmap <leader>s <Plug>(easymotion-s)
+nmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+nmap <Leader>h <Plug>(easymotion-linebackward)
+nmap <Leader>l <Plug>(easymotion-lineforward)
