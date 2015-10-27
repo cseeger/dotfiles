@@ -21,6 +21,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'bling/vim-airline'
 Plug 'wincent/terminus'
 Plug 'kien/ctrlp.vim'
+Plug 'elixir-lang/vim-elixir'
 
 call plug#end()
 
