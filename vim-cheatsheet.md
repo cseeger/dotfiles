@@ -19,3 +19,21 @@ Check `:help ctrlp-commands` and `:help ctrlp-extensions` for other commands.
 * Use `<c-n>`, `<c-p>` to select the next/previous string in the prompt's history.
 * Use `<c-y>` to create a new file and its parent directories.
 * Use `<c-z>` to mark/unmark multiple files and `<c-o>` to open them.
+
+## Ag/Ack
+
+##### Keyboard Shortcuts
+
+The quickfix results window is augmented with these convenience mappings:
+
+    ?    a quick summary of these keys, repeat to close
+    o    to open (same as Enter)
+    O    to open and close the quickfix window
+    go   to preview file, open but maintain focus on ack.vim results
+    t    to open in new tab
+    T    to open in new tab without moving to it
+    h    to open in horizontal split
+    H    to open in horizontal split, keeping focus on the results
+    v    to open in vertical split
+    gv   to open in vertical split, keeping focus on the results
+    q    to close the quickfix window
