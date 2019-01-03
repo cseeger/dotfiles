@@ -37,3 +37,15 @@ The quickfix results window is augmented with these convenience mappings:
     v    to open in vertical split
     gv   to open in vertical split, keeping focus on the results
     q    to close the quickfix window
+    
+## FZF
+
+##### Keyboard Shortcuts
+
+    <Leader>f GFiles
+    <Leader>F Files
+    <Leader>b Buffers
+    <Leader>B History
+
+
+
