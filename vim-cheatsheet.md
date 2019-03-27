@@ -49,6 +49,6 @@ The quickfix results window is augmented with these convenience mappings:
 
 ## ALE
 
-    `:lop` Open local list
-    `:lcl` Close local list
+    :lop Open local list
+    :lcl Close local list
 
