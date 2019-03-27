@@ -47,5 +47,8 @@ The quickfix results window is augmented with these convenience mappings:
     <Leader>b Buffers
     <Leader>B History
 
+## ALE
 
+    `:lop` Open local list
+    `:lcl` Close local list
 
