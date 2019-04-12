@@ -1,8 +1,10 @@
 call plug#begin('~/.nvim/plugged')
 
+Plug 'mhartington/oceanic-next'
 Plug 'junegunn/seoul256.vim'
-Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
+Plug 'morhetz/gruvbox'
 
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -13,16 +15,27 @@ Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-endwise'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'kchmck/vim-coffee-script'
-Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
 Plug 'bling/vim-airline'
 Plug 'wincent/terminus'
-Plug 'kien/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'kassio/neoterm'
+" Plug 'numkil/ag.nvim'
+Plug 'neomake/neomake'
+Plug 'othree/yajs.vim'
+" Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'pedrohdz/vim-yaml-folds'
+Plug 'AndrewRadev/splitjoin.vim'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -54,15 +67,16 @@ set timeoutlen=500
 set ttimeoutlen=10
 set grepprg=ag
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+let g:deoplete#enable_at_startup = 1
 " set cursorline "TODO: why does this spike CPU?
 
 " CtrlP settings
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = 0
-let g:ctrlp_show_hidden = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" let g:ctrlp_match_window = 'bottom,order:ttb'
+" let g:ctrlp_switch_buffer = 0
+" let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_custom_ignore = 0
+" let g:ctrlp_show_hidden = 0
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Auto commands
 " Automatically reload .vimrc on save
@@ -71,8 +85,16 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 autocmd BufLeave,FocusLost * silent! wall
 
 " Theme/Color
-let g:seoul256_background = 233
-colo seoul256
+if (has("termguicolors"))
+  set termguicolors
+endif
+syntax enable
+colorscheme OceanicNext
+" colorscheme gruvbox
+" let g:seoul256_background = 233
+" colorscheme seoul256
+" colorscheme monokai
+" set background=dark
 
 let mapleader = ","
 let g:mapleader = ","
@@ -102,7 +124,7 @@ nmap <Leader>h <Plug>(easymotion-linebackward)
 nmap <Leader>l <Plug>(easymotion-lineforward)
 
 " NeoTerm mappings
-let g:neoterm_position = 'horizontal'
+" let g:neoterm_position = 'horizontal'
 let g:neoterm_automap_keys = ',tt'
 let g:neoterm_size = '15'
 let g:neoterm_test_status_format = '1'
@@ -124,3 +146,13 @@ nnoremap <silent> ,th :call neoterm#close()<cr>
 nnoremap <silent> ,tl :call neoterm#clear()<cr>
 " kills the current job (send a <c-c>)
 nnoremap <silent> ,tc :call neoterm#kill()<cr>
+
+" FZF mappings
+nmap <Leader>f :GFiles<CR>
+nmap <Leader>F :Files<CR>
+nmap <Leader>b :Buffers<CR>
+nmap <Leader>B :History<CR>
+
+" ALE
+let g:airline#extensions#ale#enabled = 1
+let g:ale_fix_on_save = 1
