@@ -1,0 +1,17 @@
+adns			fribidi			heroku			libevent		libuv			openjpeg		rlwrap
+autoconf		fzf			heroku-node		libffi			libvterm		openssl			shared-mime-info
+autojump		gawk			hivemind		libgcrypt		libyaml			openssl@1.1		sqlite
+automake		gd			htop			libgpg-error		little-cms2		p11-kit			the_silver_searcher
+awscli			gdbm			httpie			libheif			luajit			pass			tmate
+bmon			gettext			icu4c			libksba			mpfr			pcre			translate-shell
+bonclay			git			ilmbase			libneo4j-client		msgpack			pcre2			tree
+colordiff		git-extras		imagemagick		libomp			ncurses			pinentry		unbound
+confuse			git-lfs			jasper			libpng			neo4j			pkg-config		unibilium
+coreutils		glib			jemalloc		libssh			neovim			plantuml		unixodbc
+elixir			gmp			jpeg			libtasn1		netpbm			postgresql@9.5		webp
+erlang			gnu-getopt		jq			libtermkey		nettle			python			wxmac
+exiftool		gnupg			libassuan		libtiff			node			qrencode		x265
+fish			gnutls			libcypher-parser	libtool			npth			readline		xz
+fontconfig		graphviz		libde265		libunistring		oniguruma		redis			yarn
+freetype		gts			libedit			libusb			openexr			ripgrep
+
