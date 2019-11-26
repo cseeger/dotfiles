@@ -12,3 +12,4 @@ sync:
 
 spec:
   ~/.config/nvim/init.vim: vim/init.vim
+  ~/.config/fish: fish
