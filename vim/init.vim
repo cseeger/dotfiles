@@ -24,7 +24,7 @@ Plug 'bling/vim-airline'
 Plug 'wincent/terminus'
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elixir-lang/vim-elixir'
-Plug 'kassio/neoterm'
+" Plug 'kassio/neoterm'
 Plug 'gabesoft/vim-ags'
 " Plug 'numkil/ag.nvim'
 Plug 'neomake/neomake'
@@ -36,12 +36,15 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ngmy/vim-rubocop'
 Plug 'vim-utils/vim-ruby-fold'
 Plug 'aklt/plantuml-syntax'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'thoughtbot/vim-rspec'
 
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 Plug 'w0rp/ale'
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -144,19 +147,26 @@ nnoremap <silent> <f10> :TREPLSendFile<cr>
 nnoremap <silent> <f9> :TREPLSend<cr>
 vnoremap <silent> <f9> :TREPLSend<cr>
 
-" run set test lib
-nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
-nnoremap <silent> ,rf :call neoterm#test#run('file')<cr>
-nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
-nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
+" RSpec.vim mappings
+let g:rspec_runner = "os_x_iterm2"
+let g:rspec_command = "!bundle exec rspec {spec}"
+map <Leader>rt :call RunCurrentSpecFile()<CR>
+map <Leader>rs :call RunNearestSpec()<CR>
+map <Leader>rl :call RunLastSpec()<CR>
+
+" NeoTerm
+" nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
+" nnoremap <silent> ,rf :call neoterm#test#run('file')<cr>
+" nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
+" nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
 
 " Useful maps
 " hide/close terminal
-nnoremap <silent> ,th :call neoterm#close()<cr>
+" nnoremap <silent> ,th :call neoterm#close()<cr>
 " clear terminal
-nnoremap <silent> ,tl :call neoterm#clear()<cr>
+" nnoremap <silent> ,tl :call neoterm#clear()<cr>
 " kills the current job (send a <c-c>)
-nnoremap <silent> ,tc :call neoterm#kill()<cr>
+" nnoremap <silent> ,tc :call neoterm#kill()<cr>
 
 " FZF mappings
 nmap <Leader>f :GFiles<CR>
