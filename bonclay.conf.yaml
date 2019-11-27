@@ -13,3 +13,5 @@ sync:
 spec:
   ~/.config/nvim/init.vim: vim/init.vim
   ~/.config/fish: fish
+  ~/.gitconfig: git/.gitconfig
+  ~/.gitignore_global: git/.gitignore_global

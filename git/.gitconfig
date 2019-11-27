@@ -1,0 +1,12 @@
+[user]
+  name = Chad Seeger
+	email = 90306+cseeger@users.noreply.github.com
+[core]
+	editor = nvim
+	excludesfile = /Users/cseeger/.gitignore_global
+[alias]
+  st = status
+  co = checkout
+[color]
+  ui = true
+[heroku]
