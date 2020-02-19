@@ -18,11 +18,11 @@ Plug 'tpope/vim-endwise'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug '/usr/local/opt/fzf' "required for fzf.vim
 Plug 'junegunn/fzf.vim'
 Plug 'bling/vim-airline'
 Plug 'wincent/terminus'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elixir-lang/vim-elixir'
 " Plug 'kassio/neoterm'
 Plug 'gabesoft/vim-ags'
@@ -38,13 +38,16 @@ Plug 'vim-utils/vim-ruby-fold'
 Plug 'aklt/plantuml-syntax'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'thoughtbot/vim-rspec'
-
+Plug 'rlue/vim-fold-rspec'
+Plug 'tyru/open-browser.vim'
+Plug 'weirongxu/plantuml-previewer.vim'
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 Plug 'w0rp/ale'
-" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'kristijanhusak/vim-carbon-now-sh'
 
 call plug#end()
 
@@ -149,7 +152,7 @@ vnoremap <silent> <f9> :TREPLSend<cr>
 
 " RSpec.vim mappings
 let g:rspec_runner = "os_x_iterm2"
-let g:rspec_command = "!bundle exec rspec {spec}"
+let g:rspec_command = ":sp term://bundle exec rspec {spec}"
 map <Leader>rt :call RunCurrentSpecFile()<CR>
 map <Leader>rs :call RunNearestSpec()<CR>
 map <Leader>rl :call RunLastSpec()<CR>
@@ -169,10 +172,10 @@ map <Leader>rl :call RunLastSpec()<CR>
 " nnoremap <silent> ,tc :call neoterm#kill()<cr>
 
 " FZF mappings
-nmap <Leader>f :GFiles<CR>
-nmap <Leader>F :Files<CR>
-nmap <Leader>b :Buffers<CR>
+nmap <Leader>F :GFiles<CR>
+nmap <Leader>f :Files<CR>
 nmap <Leader>B :History<CR>
+nmap <Leader>b :Buffers<CR>
 
 " ALE
 let g:airline#extensions#ale#enabled = 1

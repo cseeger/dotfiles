@@ -1,7 +1,7 @@
 # For a detailed description on the different options and how to configure them,
 # refer to the user guide: https://github.com/talal/bonclay/blob/master/doc/guide.md
 backup:
-  overwrite: false
+  overwrite: true
 
 restore:
   overwrite: false

@@ -7,7 +7,9 @@ begin
   end
 end
 
-status --is-interactive; and source (rbenv init -|psub)
+source (brew --prefix asdf)/asdf.fish
+
+fzf_key_bindings
 
 export NVM_DIR="$HOME/.nvm"
 fzf_key_bindings
