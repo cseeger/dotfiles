@@ -12,4 +12,5 @@ source (brew --prefix asdf)/asdf.fish
 fzf_key_bindings
 
 export NVM_DIR="$HOME/.nvm"
+export ERL_AFLAGS="-kernel shell_history enabled"
 fzf_key_bindings
