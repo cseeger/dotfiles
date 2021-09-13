@@ -1,0 +1,60 @@
+{
+	"name": "elixir-map",
+	"publisher": "samuel-pordeus",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/samuelpordeus/vscode-elixir-map"
+	},
+	"displayName": "Elixir Map",
+	"description": "An extension to help you with your Elixir Maps!",
+	"version": "1.0.1",
+	"engines": {
+		"vscode": "^1.45.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:elixir-map.jsonToStringMap",
+		"onCommand:elixir-map.jsonToAtomMap",
+		"onCommand:elixir-map.mapToJson"
+	],
+	"main": "./src/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "elixir-map.jsonToStringMap",
+				"title": "Elixir Map: JSON to String Map"
+			},
+			{
+				"command": "elixir-map.jsonToAtomMap",
+				"title": "Elixir Map: JSON to Atom Map"
+			},
+			{
+				"command": "elixir-map.mapToJson",
+				"title": "Elixir Map: Map to JSON"
+			}
+		]
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.45.0",
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.11.0",
+		"eslint": "^6.8.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.1.1",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.3.0"
+	},
+	"__metadata": {
+		"id": "7e7bbccb-198c-4ba4-96b5-fafb91854a1c",
+		"publisherId": "b4af43d0-4e62-429c-b6c8-4b94b84125cc",
+		"publisherDisplayName": "Samuel Pordeus"
+	}
+}
