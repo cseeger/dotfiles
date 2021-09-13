@@ -1,94 +1,74 @@
 call plug#begin('~/.nvim/plugged')
 
-Plug 'mhartington/oceanic-next'
-" Plug 'junegunn/seoul256.vim'
-" Plug 'morhetz/gruvbox'
-" Plug 'arcticicestudio/nord-vim'
+Plug 'mhartington/oceanic-next' " OceanicNext theme
 
-Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] }
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-endwise'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/vim-easy-align', { 'on': ['<Plug>(EasyAlign)', 'EasyAlign'] } " text alignment
+Plug 'tpope/vim-sensible' " a universal set of defaults
+Plug 'tpope/vim-surround' " is all about surroundings: parentheses, brackets, quotes, XML tags
+Plug 'tpope/vim-fugitive' " Git plugin
+Plug 'tpope/vim-abolish' " spelling substutions (why do I even have this?!)
+Plug 'tpope/vim-repeat' " repeat plugins (probably not needed)
+Plug 'tpope/vim-commentary' " gcc commenting
+Plug 'tpope/vim-vinegar' " split windows and netrw support (maybe not needed)
+Plug 'tpope/vim-rails' " rails support
+Plug 'tpope/vim-endwise' " end certain structures automagically
+Plug 'cakebaker/scss-syntax.vim' " scss syntax
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " nerdtree
 Plug '/usr/local/opt/fzf' "required for fzf.vim
-Plug 'junegunn/fzf.vim'
-Plug 'bling/vim-airline'
-Plug 'wincent/terminus'
-Plug 'elixir-lang/vim-elixir'
-" Plug 'kassio/neoterm'
-" Plug 'gabesoft/vim-ags'
-" Plug 'numkil/ag.nvim'
-Plug 'neomake/neomake'
-Plug 'othree/yajs.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'pedrohdz/vim-yaml-folds'
-Plug 'AndrewRadev/splitjoin.vim'
-" Plug 'ngmy/vim-rubocop'
-Plug 'vim-utils/vim-ruby-fold'
-Plug 'aklt/plantuml-syntax'
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'thoughtbot/vim-rspec'
-Plug 'rlue/vim-fold-rspec'
-Plug 'tyru/open-browser.vim'
-Plug 'weirongxu/plantuml-previewer.vim'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'junegunn/fzf.vim' " fzf
+Plug 'bling/vim-airline' " bottom bar info
+Plug 'wincent/terminus' " terminal support
+Plug 'elixir-lang/vim-elixir' "elixir plugin"
+Plug 'neomake/neomake' " async run programs
+Plug 'othree/yajs.vim'  " JS syntax
+Plug 'pangloss/vim-javascript' " JS
+Plug 'mxw/vim-jsx' " JSX
+Plug 'pedrohdz/vim-yaml-folds' " YAML folding
+Plug 'AndrewRadev/splitjoin.vim' " switching between a single-line statement and a multi-line one.
+Plug 'vim-utils/vim-ruby-fold' " Ruby folds
+Plug 'aklt/plantuml-syntax' " plantuml
+Plug 'MattesGroeger/vim-bookmarks' " vim bookmarks
+Plug 'thoughtbot/vim-rspec' " rspec support
+Plug 'rlue/vim-fold-rspec' " fold rspec
+Plug 'tyru/open-browser.vim' " open in browser
+Plug 'weirongxu/plantuml-previewer.vim' " plantuml
 
-Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'MattesGroeger/vim-bookmarks'
-Plug 'kristijanhusak/vim-carbon-now-sh'
-Plug 'mattn/emmet-vim'
+Plug 'dense-analysis/ale' " linting and LSP
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP
+Plug 'kristijanhusak/vim-carbon-now-sh' " carbon service integration
+Plug 'mattn/emmet-vim' " emmet support
 
 call plug#end()
 
 " Basics
-set nobackup
-set nowb
-set noswapfile
-set number
-set ruler
+set nobackup " no backups
+set nowb "no write backup
+set noswapfile "no swap
+set number " set linenumbers
+set ruler  " botton right rulers
 set encoding=utf8
 
 " Whitespace
-set showtabline=2
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set list
+set showtabline=2 "always show tabs
+set tabstop=2 " tab control
+set shiftwidth=2 " tab control
+set expandtab " swap tabs out for spaces
+set list "whitespace chars are visible
 set backspace=indent,eol,start
-set smarttab
-set ai
-set si
-set wrap
+set smarttab " tab is whitespace
+set ai " auto indent
+set si " context based smart indent (what about ':filetype plugin indent on')
+set wrap " auto word wrap (look to use textwidth as well)
+set cursorline " highlight current line
 
 " Misc
-set showmatch
-set clipboard=unnamed
-set synmaxcol=128
-set timeoutlen=500
-set ttimeoutlen=10
-set grepprg=ag
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-" let g:deoplete#enable_at_startup = 1
-" set cursorline "TODO: why does this spike CPU?
-
-" CtrlP settings
-" let g:ctrlp_match_window = 'bottom,order:ttb'
-" let g:ctrlp_switch_buffer = 0
-" let g:ctrlp_working_path_mode = 0
-" let g:ctrlp_custom_ignore = 0
-" let g:ctrlp_show_hidden = 0
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+set showmatch " highlight matched parens, brackets, beginning and end of code blocks
+set clipboard=unnamed " global clipboard
+set synmaxcol=128 " max col length for syntax highlight
+set timeoutlen=500 " milliseconds to wait for a mapped sequence to complete
+set ttimeoutlen=10 " time in milliseconds to wait for a key code sequence to complete
+set grepprg=ag " grep command
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1 " use guicursor now
 
 " Auto commands
 " Automatically reload .vimrc on save
@@ -98,28 +78,22 @@ autocmd BufLeave,FocusLost * silent! wall
 
 " Theme/Color
 if (has("termguicolors"))
-  set termguicolors
+  set termguicolors " enable 24-bit colors
 endif
-syntax enable
-colorscheme OceanicNext
-" colorscheme nord
-" colorscheme gruvbox
-" let g:seoul256_background = 233
-" colorscheme seoul256
-" colorscheme monokai
-" set background=dark
+syntax enable " syntax highlighting
+colorscheme OceanicNext " set colorscheme
 
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "," " set mapleader
+let g:mapleader = "," " do I still need this?
 
-vmap <Enter> <Plug>(EasyAlign)
-nnoremap <silent> _ :nohl<CR>
+vmap <Enter> <Plug>(EasyAlign) " easyalign, which I dont use...
+nnoremap <silent> _ :nohl<CR> " kill the search higlighting
 
 " NERDTree
-map <leader>n :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR> " toggle NERDTree
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-command NTF NERDTreeFind
+command NTF NERDTreeFind " trigger NERDTreeFind
 
 " Terminal mappings
 :tnoremap <A-h> <C-\><C-n><C-w>h
@@ -133,23 +107,11 @@ command NTF NERDTreeFind
 :nnoremap <A-_> <C-w>_
 :nnoremap <A-=> <C-w>=
 
-" Easymotion mappings
-" let g:EasyMotion_do_mapping = 0 " Disable default mappings`s{char}{label}`
-" nmap <leader>s <Plug>(easymotion-s)
-" nmap <leader>j <Plug>(easymotion-j)
-" nmap <leader>k <Plug>(easymotion-k)
-" nmap <Leader>h <Plug>(easymotion-linebackward)
-" nmap <Leader>l <Plug>(easymotion-lineforward)
-
 " NeoTerm mappings
 " let g:neoterm_position = 'horizontal'
 let g:neoterm_automap_keys = ',tt'
 let g:neoterm_size = '15'
 let g:neoterm_test_status_format = '1'
-
-nnoremap <silent> <f10> :TREPLSendFile<cr>
-nnoremap <silent> <f9> :TREPLSend<cr>
-vnoremap <silent> <f9> :TREPLSend<cr>
 
 " RSpec.vim mappings
 let g:rspec_runner = "os_x_iterm2"
@@ -157,20 +119,6 @@ let g:rspec_command = ":sp term://bundle exec rspec {spec}"
 map <Leader>rt :call RunCurrentSpecFile()<CR>
 map <Leader>rs :call RunNearestSpec()<CR>
 map <Leader>rl :call RunLastSpec()<CR>
-
-" NeoTerm
-" nnoremap <silent> ,rt :call neoterm#test#run('all')<cr>
-" nnoremap <silent> ,rf :call neoterm#test#run('file')<cr>
-" nnoremap <silent> ,rn :call neoterm#test#run('current')<cr>
-" nnoremap <silent> ,rr :call neoterm#test#rerun()<cr>
-
-" Useful maps
-" hide/close terminal
-" nnoremap <silent> ,th :call neoterm#close()<cr>
-" clear terminal
-" nnoremap <silent> ,tl :call neoterm#clear()<cr>
-" kills the current job (send a <c-c>)
-" nnoremap <silent> ,tc :call neoterm#kill()<cr>
 
 " FZF mappings
 nmap <Leader>F :GFiles<CR>
@@ -203,6 +151,14 @@ let g:ruby_fold_lines_limit = 200
 set nofoldenable
 
 " emmet
+let g:user_emmet_install_global = 0
+" autocmd FileType html EmmetInstall
+let g:user_emmet_leader_key='<c-m>'
+
+" tab bindings
+nnoremap :t<CR>    :tabnew<CR>
+xnoremap :t<CR>    :tabnew<CR>
+
 let g:user_emmet_install_global = 0
 " autocmd FileType html EmmetInstall
 let g:user_emmet_leader_key='<c-m>'

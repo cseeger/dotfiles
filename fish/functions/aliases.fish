@@ -1,4 +1,5 @@
 alias l="ls -las"
+alias hm="history merge"
 
 # Git
 alias g="git"
