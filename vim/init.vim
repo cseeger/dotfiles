@@ -11,19 +11,32 @@ Plug 'tpope/vim-sensible' " a universal set of defaults
 Plug 'tpope/vim-fugitive' " Git plugin
 Plug 'tpope/vim-commentary' " gcc commenting
 Plug 'tpope/vim-vinegar' " split windows and netrw support (maybe not needed)
-" Plug 'tpope/vim-endwise' " end certain structures automagically
+Plug 'tpope/vim-endwise' " end certain structures automagically
+Plug 'rstacruz/vim-closer' " auto close parens, brackets, etc.
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } " nerdtree
-Plug 'hoob3rt/lualine.nvim'
+Plug 'hoob3rt/lualine.nvim' " lua based airline
 Plug 'elixir-lang/vim-elixir' " elixir plugin
-Plug 'mhinz/vim-mix-format'
+Plug 'mhinz/vim-mix-format' " run `mix format`
+Plug 'npxbr/glow.nvim' " markdown preview
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'nvim-treesitter/playground'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons' "dev icons for lualine/airline
 Plug 'mustache/vim-mustache-handlebars' "handlebars templating support
 Plug 'lewis6991/gitsigns.nvim'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'ray-x/cmp-treesitter'
+Plug 'hrsh7th/nvim-cmp'
 
 call plug#end()
 
@@ -87,6 +100,18 @@ require'nvim-treesitter.configs'.setup {
     enable = true, -- false will disable the whole extension
     disable = { 'elixir' }, -- list of language that will be disabled
   },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  indent = {
+    enable = true
+  },
   rainbow = {
     enable = true
   }
@@ -112,6 +137,95 @@ require('gitsigns').setup {
 }
 EOF
 
+" LSP
+lua <<EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+end
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require'lspconfig'.elixirls.setup{
+  cmd = { '/Users/cseeger/.local/share/nvim/lsp_servers/elixir/elixir-ls/language_server.sh' },
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+-- local servers = { 'elixirls' }
+-- for _, lsp in ipairs(servers) do
+--   nvim_lsp[lsp].setup {
+--     on_attach = on_attach,
+--     flags = {
+--       debounce_text_changes = 150,
+--     }
+--   }
+-- end
+EOF
+
+"completion
+set completeopt=menu,menuone,noselect
+
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'buffer' },
+      { name = 'treesitter' }
+    })
+  })
+EOF
+
+lua <<EOF
+require('settings.keymap')
+EOF
+
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -121,73 +235,6 @@ nnoremap <leader>fv <cmd>Telescope git_files<cr>
 
 " Clipboard commands
 nmap :cp<CR> :let @+ = expand("%")<CR>
-= 1
-command NTF NERDTreeFind " trigger NERDTreeFind
 
-" Terminal mappings
-:tnoremap <A-h> <C-\><C-n><C-w>h
-:tnoremap <A-j> <C-\><C-n><C-w>j
-:tnoremap <A-k> <C-\><C-n><C-w>k
-:tnoremap <A-l> <C-\><C-n><C-w>l
-:nnoremap <A-h> <C-w>h
-:nnoremap <A-j> <C-w>j
-:nnoremap <A-k> <C-w>k
-:nnoremap <A-l> <C-w>l
-:nnoremap <A-_> <C-w>_
-:nnoremap <A-=> <C-w>=
-
-" NeoTerm mappings
-" let g:neoterm_position = 'horizontal'
-let g:neoterm_automap_keys = ',tt'
-let g:neoterm_size = '15'
-let g:neoterm_test_status_format = '1'
-
-" RSpec.vim mappings
-let g:rspec_runner = "os_x_iterm2"
-let g:rspec_command = ":sp term://bundle exec rspec {spec}"
-map <Leader>rt :call RunCurrentSpecFile()<CR>
-map <Leader>rs :call RunNearestSpec()<CR>
-map <Leader>rl :call RunLastSpec()<CR>
-
-" FZF mappings
-nmap <Leader>F :GFiles<CR>
-nmap <Leader>f :Files<CR>
-nmap <Leader>B :History<CR>
-nmap <Leader>b :Buffers<CR>
-
-" ALE (check out: https://github.com/mhanberg/.dotfiles/blob/5fce37367204bb9d2a0ac257955c0d9c01b73fb5/vimrc#L131)
-let g:airline#extensions#ale#enabled = 1
-let g:ale_linters = {}
-let g:ale_linters.ruby = ['rubocop', 'ruby', 'solargraph']
-
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
-let g:ale_fixers.ruby = ['rubocop']
-let g:ale_ruby_rubocop_executable = 'bundle'
-
-" Coc Prettier
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-vmap <leader>p  <Plug>(coc-format-selected)
-nmap <leader>p  <Plug>(coc-format-selected)
-
-" javascript
-augroup javascript_folding
-  au!
-  au FileType javascript setlocal foldmethod=syntax
-augroup END
-
-" ruby folding
-let g:ruby_fold_lines_limit = 200
-set nofoldenable
-
-" emmet
-let g:user_emmet_install_global = 0
-" autocmd FileType html EmmetInstall
-let g:user_emmet_leader_key='<c-m>'
-
-" tab bindings
-nnoremap :t<CR>    :tabnew<CR>
-xnoremap :t<CR>    :tabnew<CR>
-
-let g:user_emmet_install_global = 0
-" autocmd FileType html EmmetInstall
-let g:user_emmet_leader_key='<c-m>'
+" Plug commands
+nmap :pi<CR> :PlugInstall<CR>

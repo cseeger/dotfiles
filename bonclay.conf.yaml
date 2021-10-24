@@ -12,7 +12,8 @@ sync:
 
 spec:
   ~/.config/nvim/init.vim: vim/init.vim
+  ~/.config/nvim/lua/settings/keymap.lua: vim/lua/settings/keymap.lua
   ~/.config/fish: fish
   ~/.gitconfig: git/.gitconfig
   ~/.gitignore_global: git/.gitignore_global
-  ~/.vscode: vscode
+  ~/.vscode: .vscode
